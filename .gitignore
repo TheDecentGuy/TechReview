@@ -1,4 +1,3 @@
 __pycache__/
-env/
-.flaskenv/
-.DS_Store/
+.flaskenv
+.DS_Store
