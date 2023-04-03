@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Technical Review Paper Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-100">
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <a href="#" class="flex-shrink-0 flex items-center">
+                        <img class="h-8 w-8" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                            alt="Workflow" />
+                        <span class="font-bold ml-2">ReviewGen</span>
+                    </a>
+                </div>
+                <div class="hidden sm:flex sm:items-center sm:ml-6">
+                    <a href="#"
+                        class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-gray-500">
+                        Generate Review Paper
+                    </a>
+                    <a href="#"
+                        class="ml-4 inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-gray-500">
+                        About
+                    </a>
+                    <a href="#"
+                        class="ml-4 inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-gray-500">
+                        Contact Us
+                    </a>
+                </div>
+                <div class="-mr-2 flex items-center sm:hidden">
+                    <button type="button"
+                        class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                        aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <!-- Heroicon name: outline/menu -->
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="sm:hidden" id="mobile-menu" aria-expanded="false">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Generate
+                    Review Paper</a>
+                <a href="#"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">About</a>
+                <a href="#"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Contact
+                    Us</a>
+            </div>
+    </nav>
+    <div class="bg-gray-50">
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Generate Technical Review Papers with Ease
+                </h2>
+                <p class="mt-4 text-lg text-gray-500">
+                    Our platform makes it simple to create high-quality technical review papers in a fraction of the
+                    time.
+                </p>
+                <div class="mt-6">
+                    <button onclick="window.location.href='{{ url_for('form')}}'"
+                        class="inline-flex items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                        Generate Review Paper
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white">
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center">
+                <h3 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Why Choose ReviewGen?
+                </h3>
+                <p class="mt-4 text-lg text-gray-500">
+                    ReviewGen offers many benefits, including:
+                </p>
+            </div>
+            <div class="mt-10">
+                <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                                <!-- Heroicon name: outline/globe-alt -->
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 15a6 6 0 01-6 6H9a6 6 0 01-6-6V9a6 6 0 016-6h6m6 0a6 6 0 016 6v6m-18-2a2 2 0 012-2h2m4 0h6m2 0a2 2 0 012 2v6m-18-2V9m0-2a2 2 0 012-2h6a2 2 0 012 2v6a2 2 0 01-2 2h-2m-4 0h-6a2 2 0 01-2-2V9a2 2 0 012-2" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <dt class="text-lg leading-6 font-medium text-gray-900">
+                                Easy to Use
+                            </dt>
+                            <dd class="mt-2 text-base text-gray-500">
+                                Our platform is user-friendly and intuitive, making it simple to create technical review
+                                papers with
+                                ease.
+                            </dd>
+                        </div>
+                    </div>
+
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                                <!-- Heroicon name: outline/scale -->
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M20 6L9 17l-5-5M5 11h14a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <dt class="text-lg leading-6 font-medium text-gray-900">
+                                Versatile Templates
+                            </dt>
+                            <dd class="mt-2 text-base text-gray-500">
+                                ReviewGen offers a variety of templates to choose from, so you can find the perfect one
+                                for your
+                                project.
+                            </dd>
+                        </div>
+                    </div>
+
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                                <!-- Heroicon name: outline/lightning-bolt -->
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <dt class="text-lg leading-6 font-medium text-gray-900">
+                                Fast and Efficient
+                            </dt>
+                            <dd class="mt-2 text-base text-gray-500">
+                                With ReviewGen, you can generate technical review papers in a fraction of the time it
+                                would take to do
+                                it manually.
+                            </dd>
+                        </div>
+                    </div>
+
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                                <!-- Heroicon name: outline/annotation -->
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 21l-4-4V5a2 2 0 012-2h12a2 2 0 012 2v8l-4-4m-5 5l-4 4m4-4H3" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <dt class="text-lg leading-6 font-medium text-gray-900
+                Collaboration Made Easy
+            </dt>
+            <dd class=" mt-2 text-base text-gray-500">
+                                Share your project with collaborators and work on it together in real-time.
+                                </dd>
+                        </div>
+                    </div>
+
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                                <!-- Heroicon name: outline/mail -->
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 6l9 6-9 6V6z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <dt class="text-lg leading-6 font-medium text-gray-900">
+                                Easy Exporting
+                            </dt>
+                            <dd class="mt-2 text-base text-gray-500">
+                                Export your technical review paper to a variety of formats including PDF, Word, and
+                                HTML.
+                            </dd>
+                        </div>
+                    </div>
+                </dl>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- CTA Section -->
+    <div class="bg-gray-800">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-3 lg:gap-8">
+                <div>
+                    <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                        <span class="block">Start generating technical review papers</span>
+                        <span class="block text-indigo-400">with ReviewGen today.</span>
+                    </h2>
+                    <p class="mt-4 text-lg leading-6 text-gray-300">
+                        Get started today and see how ReviewGen can make technical review paper generation easier and
+                        more
+                        efficient.
+                    </p>
+                </div>
+                <div class="mt-8 lg:mt-0 lg:col-span-3 flex justify-center">
+                    <div class="rounded-md shadow">
+                        <a href="#"
+                            class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                            Get started
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Section -->
+    <!-- Footer Section -->
+    <footer class="bg-white">
+        <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+            <nav class="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
+                <div class="px-5 py-2">
+                    <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+                        About
+                    </a>
+                </div>
+                <div class="px-5 py-2">
+                    <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+                        Contact
+                    </a>
+                </div>
+
+                <div class="px-5 py-2">
+                    <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+
+                        Privacy Policy
+                    </a>
+                </div>
+
+                <div class="px-5 py-2">
+                    <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+                        Terms of Service
+                    </a>
+                </div>
+            </nav>
+            <div class="mt-8 flex justify-center space-x-6">
+                <a href="#" class="text-gray-400 hover:text-gray-500">
+                    <span class="sr-only">Facebook</span>
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M22 12v-2c0-4.42-3.58-8-8-8h-2V0h2c6.63 0 12 5.37 12 12z" />
+                        <path
+                            d="M17.8 12.4l.4 2.6h-3v8h-3.6v-8h-1.8v-2.6h1.8v-1.7c0-1.8 1-2.3 2.2-2.3 .6 0 1.4.1 1.4.1v1.9h-.8c-.8 0-1 .5-1 1v1.2h1.8l-.2 2.6z" />
+                    </svg>
+                </a>
+
+                <a href="#" class="text-gray-400 hover:text-gray-500">
+                    <span class="sr-only">Twitter</span>
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M23 4.999c-.885.389-1.832.654-2.826.772 1.015-.611 1.796-1.574 2.166-2.722-.951.559-2.005.963-3.126 1.184-.896-.958-2.174-1.555-3.586-1.555-2.711 0-4.909 2.198-4.909 4.91 0 .386.044.76.129 1.118C7.965 8.34 4.204 6.124 1.698 3.016 .338 5.093.882 7.515 2.735 9.18c-.827-.027-1.607-.253-2.29-.632v.064c0 1.897 1.351 3.478 3.143 3.841-.33.089-.678.135-1.037.135-.253 0-.499-.025-.736-.073.499 1.56 1.93 2.698 3.633 2.731-1.33 1.043-3.003 1.664-4.82 1.664-.314 0-.625-.018-.933-.054 1.72 1.104 3.764 1.746 5.967 1.746 7.163 0 11.087-5.947 11.087-11.086l-.013-.505C21.172 6.831 22.14 5.505 23 3.999z" />
+                    </svg>
+                </a>
+
+                <a href="#" class="text-gray-400 hover:text-gray-500">
+                    <span class="sr-only">GitHub</span>
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M12.0001 2.00098C6.47807 2.00098 2.0001 6.47895 2.0001 11.999C2.0001 16.525 5.24358 20.457 9.44053 21.493C9.8377 21.5709 10.0288 21.2322 10.0288 20.9635C10.0288 20.7069 10.0265 20.1748 10.0265 19.3696C6.47653 19.9287 5.37628 17.7161 5.07643 16.9823C4.92188 16.6543 4.42826 15.8457 3.93177 15.5684C3.43925 15.2938 2.83443 14.6874 3.62578 14.6847C4.48255 14.6818 4.86915 15.2327 5.18176 15.5422C6.0332 16.4468 7.17273 16.0429 7.56899 15.8552C7.65149 15.8178 7.76685 15.8179 7.84945 15.8556C8.24498 16.0433 9.38452 16.4468 10.2359 15.5422C10.5485 15.2327 10.9351 14.6818 11.7919 14.6847C12.5833 14.6874 11.9785 15.2938 11.486 15.5684C10.9895 15.8457 10.4959 16.6543 10.3414 16.9823C10.0415 17.7161 8.94128 19.9287 5.39126 19.3696C5.39126 20.1868 5.38893 20.7167 5.38893 20.9635C5.38893 21.2322 5.57997 21.5709 5.97714 21.493C10.1741 20.457 13.4176 16.525 13.4176 11.999C13.4176 6.47895 8.93966 2.00098 12.0001 2.00098Z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+    </div>
+</body>
+
+</html>

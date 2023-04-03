@@ -9,7 +9,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('home.html', author="")
+    return render_template('index.html')
+
+
+@app.route('/form')
+def form():
+    return render_template('form.html', author="")
 
 
 @app.route('/generate', methods=['POST'])
