@@ -3,6 +3,8 @@ from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
 from docx.shared import Inches, Pt
+from docx.enum.section import WD_ORIENT
+
 import openai
 app = Flask(__name__)
 
@@ -27,88 +29,98 @@ def generate():
 
     # Generate the technical review paper using OpenAI API
     prompt = "Write a example of technical review paper titled " + \
-        title + " by "+author+"."
+        pTitle + " by "+author+"."
 
+    print(prompt)
     prompt = str(prompt)
 
-    openai.api_key = "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"
+    openai.api_key = "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"
 
     completion = openai.ChatCompletion. create(
-        model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Abstract based on "+title}])
+        model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Abstract based on "+pTitle}])
     abstract = completion.choices[0].message.content
 
     completion = openai.ChatCompletion. create(
-        model="gpt-3.5-turbo", messages=[{"role": "user", "content": "write Introduction on "+title}])
+        model="gpt-3.5-turbo", messages=[{"role": "user", "content": "write Introduction on "+pTitle}])
     intro = completion.choices[0].message.content
 
     completion = openai.ChatCompletion. create(
-        model="gpt-3.5-turbo", messages=[{"role": "user", "content": "write Literature Survey on "+title}])
+        model="gpt-3.5-turbo", messages=[{"role": "user", "content": "write Literature Survey on "+pTitle}])
     literature = completion.choices[0].message.content
 
     completion = openai.ChatCompletion. create(
-        model="gpt-3.5-turbo", messages=[{"role": "user", "content": "write Conclusion on "+title}])
+        model="gpt-3.5-turbo", messages=[{"role": "user", "content": "write Conclusion on "+pTitle}])
     conclusion = completion.choices[0].message.content
 
     completion = openai.ChatCompletion. create(
         model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Acknowledgement Based on "+proposedSl}])
     ack = completion.choices[0].message.content
 
-    document = Document()
+    completion = openai.ChatCompletion. create(
+        model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Only single Reference Based on "+pTitle}])
+    ref1 = completion.choices[0].message.content
 
-    # Set the page margins
-    sections = document.sections
-    for section in sections:
-        section.top_margin = Inches(1)
-        section.bottom_margin = Inches(1)
-        section.left_margin = Inches(0.75)
-        section.right_margin = Inches(0.75)
+    completion = openai.ChatCompletion. create(
+        model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Only single Reference different than "+ref1+"Based on "+pTitle}])
+    ref2 = completion.choices[0].message.content
 
-    # Set the font
-    style = document.styles['Normal']
-    font = style.font
-    font.name = 'Times New Roman'
-    font.size = Pt(10)
+    completion = openai.ChatCompletion. create(
+        model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Only single Reference different than "+ref1+","+ref2+"Based on "+pTitle}])
+    ref3 = completion.choices[0].message.content
 
-    # Add a title
-    title = document.add_heading(title, 0)
-    title.alignment = 1  # center align
+    completion = openai.ChatCompletion. create(
+        model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Keywords Related "+pTitle}])
+    keywords = completion.choices[0].message.content
 
-    # Add authors
-    p = document.add_paragraph()
-    p.alignment = 1  # center align
-    p.add_run(author).bold = True
-    p.add_run(', Author 2, and Author 3')
+    document = Document('static/IEEE.docx')  # Open the document
 
-    # Set the text as two columns
-    section = document.sections[0]
-    section.left_margin = Inches(0.7)
-    section.right_margin = Inches(0.7)
-    cols = section._sectPr.xpath('./w:cols')[0]
-    cols.set(qn('w:num'), '2')
+    # Access the title paragraph and change its text
+    title_paragraph = document.paragraphs[0]
+    title_paragraph.text = pTitle
 
-    # Add the abstract and keywords
-    document.add_heading('Abstract', 1)
-    abstract_para = document.add_paragraph(abstract)
-    abstract_para.paragraph_format.left_indent = Inches(0.5)
-    abstract_para.paragraph_format.right_indent = Inches(0.5)
-    abstract_para.paragraph_format.first_line_indent = Inches(-0.25)
+    title_paragraph = document.paragraphs[1]
+    title_paragraph.text = author
 
-    document.add_heading('Index Terms', 2)
-    keywords_para = document.add_paragraph('Keyword 1, Keyword 2, Keyword 3')
-    keywords_para.paragraph_format.left_indent = Inches(0.5)
-    keywords_para.paragraph_format.right_indent = Inches(0.5)
+    title_paragraph = document.paragraphs[5]
+    title_paragraph.text = "Abstract- "+abstract
 
-    # Add the introduction
-    document.add_heading('I. Introduction', 1)
-    document.add_paragraph(intro)
+    title_paragraph = document.paragraphs[6]
+    title_paragraph.text = 'Keywords- '+keywords
 
-# Add a figure at the top of a column
+    title_paragraph = document.paragraphs[8]
+    title_paragraph.text = intro
 
-# Save the document
-    document.save('static/demo.docx')
+    title_paragraph = document.paragraphs[10]
+    title_paragraph.text = literature
+
+    title_paragraph = document.paragraphs[12]
+    title_paragraph.text = problemStatement
+
+    title_paragraph = document.paragraphs[14]
+    title_paragraph.text = proposedSl
+
+    title_paragraph = document.paragraphs[16]
+    title_paragraph.text = result
+
+    title_paragraph = document.paragraphs[18]
+    title_paragraph.text = conclusion
+
+    title_paragraph = document.paragraphs[20]
+    title_paragraph.text = ack
+
+    title_paragraph = document.paragraphs[22]
+    title_paragraph.text = ref1
+
+    title_paragraph = document.paragraphs[23]
+    title_paragraph.text = ref2
+
+    title_paragraph = document.paragraphs[24]
+    title_paragraph.text = ref3
+
+    document.save('static/output.docx')  # Save the modified document
 
     # Return the generated paper to the user
-    return render_template('result.html', pTitle=pTitle, author=author, problemStatement=problemStatement, proposedSl=proposedSl, abstract=abstract, intro=intro, literature=literature, conclusion=conclusion, ack=ack, result=result)
+    return render_template('result.html', pTitle=pTitle, author=author, problemStatement=problemStatement, proposedSl=proposedSl, abstract=abstract, intro=intro, literature=literature, conclusion=conclusion, ack=ack, result=result, ref1=ref1, ref2=ref2, ref3=ref3)
 
 
 if __name__ == '__main__':
