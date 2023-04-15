@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request
 from docx import Document
+from flask import send_file
+from docx2pdf import convert
+
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
 from docx.shared import Inches, Pt
@@ -34,7 +37,7 @@ def generate():
     print(prompt)
     prompt = str(prompt)
 
-    openai.api_key = "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"
+    openai.api_key = "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"
 
     completion = openai.ChatCompletion. create(
         model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Abstract based on "+pTitle}])
@@ -73,7 +76,7 @@ def generate():
         model="gpt-3.5-turbo", messages=[{"role": "user", "content": "10 Keywords Related in single line comma format "+pTitle}])
     keywords = completion.choices[0].message.content
 
-    document = Document('static/IEEE.docx')  # Open the document
+    document = Document('IEEE.docx')  # Open the document
 
     # Access the title paragraph and change its text
     title_paragraph = document.paragraphs[0]
@@ -113,9 +116,17 @@ def generate():
     title_paragraph.text = ref1
 
     document.save('static/output.docx')  # Save the modified document
+    convert('static/output.docx', 'static/output.pdf')
 
     # Return the generated paper to the user
     return render_template('result.html', pTitle=pTitle, author=author, problemStatement=problemStatement, proposedSl=proposedSl, abstract=abstract, intro=intro, literature=literature, conclusion=conclusion, ack=ack, result=result)
+
+
+@app.route('/download')
+def download():
+    document = Document()
+    # Add content to the document here
+    return send_file('static/output.docx', as_attachment=True)
 
 
 if __name__ == '__main__':

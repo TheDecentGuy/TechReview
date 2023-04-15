@@ -1,50 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>IEEE Technical Review Format</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Technical Review Paper Generator</title>
     <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
 
-<body class="font-sans text-base leading-normal">
-    <div class="max-w-screen-md mx-auto p-8">
-        <h1 class="text-3xl font-serif mb-8 text-center">IEEE Technical Review</h1>
-        <h2 class="text-2xl font-serif mb-6">{{pTitle}}</h2>
+<body class="bg-gray-100">
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <a href="#" onclick="window.location.href='{{ url_for('index')}}'"
+                        class="flex-shrink-0 flex items-center">
+                        <img class="h-8 w-8" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                            alt="Workflow" />
+                        <span class="font-bold ml-2">ReviewGen</span>
+                    </a>
+                    <div class="hidden sm:ml-6 sm:flex">
+                        <a href="#"
+                            class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-gray-500">
+                            Generate Review Paper
+                        </a>
+                        <a href="#"
+                            class="ml-4 inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-gray-500">
+                            About
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main>
 
-        <h3 class="text-xl mb-2">Author: {{author}}</h3>
+        <div class="">
+            <div class="max-w-7xl mx-auto py-12 sm:px-6 lg:px-8">
+                <div class="px-4 py-6 sm:px-0">
+                    <h2 class="text-2xl font-bold text-gray-900">Technical Review Paper</h2>
+                    <div class="mt-4">
+                        <iframe src="{{ url_for('static', filename='output.pdf') }}" width="100%"
+                            height="700px"></iframe>
 
-        <h4 class="text-lg font-serif mb-2">Abstract</h4>
-        <p class="mb-6">{{abstract}}</p>
+                        <div class="m-4">
+                            <a href="/download"
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                download>Download</a>
+                        </div>
+                        <p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut ligula
+                            sit amet enim
+                            dapibus auctor. Aliquam rutrum lectus vel elit malesuada, nec aliquet augue vestibulum.
+                            Suspendisse vitae
+                            posuere ante, ut bibendum ipsum. Sed maximus ut augue eu finibus. Pellentesque eget ligula
+                            vitae turpis
+                            bibendum fermentum eu vel est. Fusce porttitor vulputate tincidunt. Etiam at interdum augue,
+                            vel venenatis
+                            metus. Nunc pellentesque nibh vel quam tincidunt dignissim. Integer hendrerit leo augue,
+                            euismod volutpat
+                            turpis suscipit eu.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 
-        <h4 class="text-lg font-serif mb-2">Introduction</h4>
-        <p class="mb-6">{{intro}}</p>
-
-        <h4 class="text-lg font-serif mb-2">Literature Survey</h4>
-        <p class="mb-6">{{literature}}</p>
-
-        <h4 class="text-lg font-serif mb-2">Problem Statement</h4>
-        <p class="mb-6">{{problemStatement}}</p>
-
-        <h4 class="text-lg font-serif mb-2">Proposed Solution</h4>
-        <p class="mb-6">{{proposedSl}}</p>
-
-        <h4 class="text-lg font-serif mb-2">Experimental Results</h4>
-        <p class="mb-6">{{result}}</p>
-
-        <h4 class="text-lg font-serif mb-2">Conclusion</h4>
-        <p class="mb-6">{{conclusion}}</p>
-
-        <h4 class="text-lg font-serif mb-2">Acknowledgemnet</h4>
-        <p class="mb-6">{{ack}}</p>
-
-        <h4 class="text-lg font-serif mb-2">References</h4>
-        <ul class="list-disc pl-8">
-            <li class="mb-2"></li>
-            <li class="mb-2"></li>
-            <li class="mb-2"></li>
-        </ul>
-    </div>
 </body>
 
 </html>
