@@ -37,7 +37,7 @@ def generate():
     print(prompt)
     prompt = str(prompt)
 
-    openai.api_key = "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"
+    openai.api_key = "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"
 
     completion = openai.ChatCompletion. create(
         model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Abstract based on "+pTitle}])
@@ -48,7 +48,11 @@ def generate():
     intro = completion.choices[0].message.content
 
     completion = openai.ChatCompletion. create(
-        model="gpt-3.5-turbo", messages=[{"role": "user", "content": "write only Literature Survey on "+pTitle}])
+        model="gpt-3.5-turbo", messages=[{"role": "user", "content": "References Based on "+pTitle+".List it in square parentheses numbering."}])
+    ref1 = completion.choices[0].message.content
+
+    completion = openai.ChatCompletion. create(
+        model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Write a detailed literature survey on the "+pTitle+" , according to "+ref1+". Include square parentheses numbering in the literature survey based on the provided reference"}])
     literature = completion.choices[0].message.content
 
     completion = openai.ChatCompletion. create(
@@ -58,11 +62,6 @@ def generate():
     # completion = openai.ChatCompletion. create(
     #     model="gpt-3.5-turbo", messages=[{"role": "user", "content": "example of basics Acknowledgement as student wroking on mini project Based on "+pTitle}])
     # ack = completion.choices[0].message.content
-    ack = "hello world"
-
-    completion = openai.ChatCompletion. create(
-        model="gpt-3.5-turbo", messages=[{"role": "user", "content": "References Based on "+pTitle+".List it in square parentheses numbering."}])
-    ref1 = completion.choices[0].message.content
 
     # completion = openai.ChatCompletion. create(
     #     model="gpt-3.5-turbo", messages=[{"role": "user", "content": "single Reference Based on "+pTitle}])
@@ -119,7 +118,7 @@ def generate():
     convert('static/output.docx', 'static/output.pdf')
 
     # Return the generated paper to the user
-    return render_template('result.html', pTitle=pTitle, author=author, problemStatement=problemStatement, proposedSl=proposedSl, abstract=abstract, intro=intro, literature=literature, conclusion=conclusion, ack=ack, result=result)
+    return render_template('result.html', pTitle=pTitle, author=author, problemStatement=problemStatement, proposedSl=proposedSl, abstract=abstract, intro=intro, literature=literature, conclusion=conclusion, result=result)
 
 
 @app.route('/download')
