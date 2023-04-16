@@ -37,14 +37,14 @@ def generate():
     print(prompt)
     prompt = str(prompt)
 
-    openai.api_key = "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"
+    openai.api_key = "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"
 
     completion = openai.ChatCompletion. create(
-        model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Abstract based on "+pTitle}])
+        model="gpt-3.5-turbo", messages=[{"role": "user", "content": "write only Abstract based on "+pTitle}])
     abstract = completion.choices[0].message.content
 
     completion = openai.ChatCompletion. create(
-        model="gpt-3.5-turbo", messages=[{"role": "user", "content": "write Introduction on "+pTitle}])
+        model="gpt-3.5-turbo", messages=[{"role": "user", "content": "write only Introduction on "+pTitle}])
     intro = completion.choices[0].message.content
 
     completion = openai.ChatCompletion. create(
