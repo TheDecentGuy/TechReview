@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from docx import Document
 from flask import send_file
 from docx2pdf import convert
+import os
 
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
@@ -37,7 +38,7 @@ def generate():
     print(prompt)
     prompt = str(prompt)
 
-    openai.api_key = "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"
+    openai.api_key = os.environ.get('API_KEY')
 
     completion = openai.ChatCompletion. create(
         model="gpt-3.5-turbo", messages=[{"role": "user", "content": "write only Abstract based on "+pTitle}])
