@@ -116,7 +116,7 @@ def generate():
         #         conclusion = generated_text
 
         completion = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo", messages=[{"role": "user", "content": "write only Abstract, only Introduction, only Keywords, only Conclusion about "+title+")"}])
+            model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Write Abstract, only Introduction, Keywords, Conclusion about "+title+" in detail. Give me in this format Abstract:, Introduction:, Keywords: & Conclusion:."}])
 
         part1 = completion.choices[0].message.content
 
@@ -156,7 +156,7 @@ def generate():
         time.sleep(10)
 
         completion = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo", messages=[{"role": "user", "content": "write 5 references about "+title+" using ml. write detailed Literature survey according to generated references. List references in square parenthesis. give me in this format References: & Literature Survey: "}])
+            model="gpt-3.5-turbo", messages=[{"role": "user", "content": "write 5 references(List references in square parenthesis format) about "+title+". write detailed Literature survey according to generated references.. give me in this format References: & Literature Survey: "}])
         part2 = completion.choices[0].message.content
 
         print(part2)
