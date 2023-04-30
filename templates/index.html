@@ -5,6 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Technical Review Paper Generator</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         html {
@@ -24,7 +26,7 @@
                         <span class="font-bold ml-2">ReviewGen</span>
                     </a>
                 </div>
-                <div class="hidden sm:flex sm:items-center sm:ml-6">
+                <div class=" hidden sm:flex sm:items-center sm:ml-6">
                     <a href="#"
                         class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-gray-500"
                         onclick="window.location.href='/form'">
@@ -40,7 +42,7 @@
                     </a>
                 </div>
                 <div class="-mr-2 flex items-center sm:hidden">
-                    <button type="button"
+                    <button type="button" id="menu-button"
                         class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
                         aria-expanded="false">
                         <span class="sr-only">Open main menu</span>
@@ -55,17 +57,24 @@
             </div>
         </div>
 
-        <div class="sm:hidden" id="mobile-menu" aria-expanded="false">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="#"
-                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Generate
-                    Review Paper</a>
-                <a href="#"
-                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">About</a>
-                <a href="#"
-                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Contact
-                    Us</a>
-            </div>
+        <div class="hidden " id="mobile-menu" aria-expanded="false">
+            <ul class="px-2 pt-2 pb-3 space-y-1 transition-all ease-in duration-500">
+                <li>
+                    <a href="#" onclick="window.location.href='/form'"
+                        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Generate
+                        Review Paper</a>
+                </li>
+                <li>
+                    <a href="#aboutus"
+                        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">About</a>
+                </li>
+                <li>
+                    <a href="#contactus"
+                        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Contact
+                        Us</a>
+                </li>
+            </ul>
+        </div>
     </nav>
     <div class="bg-gray-50">
         <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
@@ -248,7 +257,7 @@
                 <span class="block text-indigo-400">ReviewGen email provided.</span>
             </h2>
             <div
-                class="bg-indigo-200 h-[40rem] rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative">
+                class="bg-indigo-200 lg:h-[40rem] sm:h-[20rem] rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative">
                 <iframe width="100%" height="100%" class="absolute inset-0" frameborder="0" title="map" marginheight="0"
                     marginwidth="0" scrolling="no"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.2643755123813!2d72.8180197750489!3d18.963928155481543!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ce1486c8b1c1%3A0xb5e5277355a0e125!2ssiddhesh-deep%20co-op%20hsg!5e0!3m2!1sen!2sin!4v1682775546309!5m2!1sen!2sin"
@@ -352,7 +361,21 @@
             </div>
         </div>
     </footer>
+    <script>
+        function Menu(e) {
+            let list = document.querySelector('ul');
+            e.name === 'mobile-menu' ? (e.name = 'close', list.classList.add('top-[80px]'), list.classList.add('opacity')) : (e.name = "mobile-menu", list.classList.remove('top-[80px]'))
+        }
+        $(document).ready(function () {
+            $('#menu-button').click(function () {
+                $('#mobile-menu').slideToggle(500);
 
+                $('#mobile-menu').toggleClass('hidden');
+            });
+        });
+
+
+    </script>
 </body>
 
 </html>
