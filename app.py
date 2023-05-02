@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory
 from docx import Document
 from flask import send_file
 from docx2pdf import convert
@@ -6,7 +6,11 @@ import time
 import openai
 import re
 import os
+
 app = Flask(__name__)
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
 
 
 @app.route('/')
@@ -39,7 +43,7 @@ def form():
 
 
 @app.route('/generate', methods=['POST'])
-def generate():
+async def generate():
     try:
         title = request.form['title']
         author = request.form['author']
@@ -48,72 +52,7 @@ def generate():
         result = request.form['result']
 
         # Generate the technical review paper using OpenAI API
-        prompt = "Write a example of technical review paper titled " + \
-            title + " by "+author+"."
-
-        print(prompt)
-        prompt = str(prompt)
-
         openai.api_key = "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"
-
-        # completion = openai.ChatCompletion. create(
-        #     model="gpt-3.5-turbo", messages=[{"role": "user", "content": "write only Abstract based on "+title}])
-        # abstract = completion.choices[0].message.content
-        # time.sleep(10)
-
-        # completion = openai.ChatCompletion. create(
-        #     model="gpt-3.5-turbo", messages=[{"role": "user", "content": "write only Introduction on "+title}])
-        # introduction = completion.choices[0].message.content
-        # time.sleep(10)
-
-        # completion = openai.ChatCompletion. create(
-        #     model="gpt-3.5-turbo", messages=[{"role": "user", "content": "References Based on "+title+".List it in square parentheses numbering."}])
-        # references = completion.choices[0].message.content
-        # time.sleep(10)
-
-        # completion = openai.ChatCompletion. create(
-        #     model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Write a detailed literature survey on the "+title+" , according to "+references+". Include square parentheses numbering in the literature survey based on the provided reference"}])
-        # literature_survey = completion.choices[0].message.content
-        # time.sleep(10)
-
-        # completion = openai.ChatCompletion. create(
-        #     model="gpt-3.5-turbo", messages=[{"role": "user", "content": "write Conclusion on "+title}])
-        # conclusion = completion.choices[0].message.content
-        # time.sleep(10)
-
-        # completion = openai.ChatCompletion. create(
-        #     model="gpt-3.5-turbo", messages=[{"role": "user", "content": "10 Keywords Related in single line comma format "+title}])
-        # keywords = completion.choices[0].message.content
-
-        # completion = openai.ChatCompletion. create(
-        #     model="gpt-3.5-turbo", messages=[{"role": "user", "content": "5 References Based on "+title+".List it in square parentheses numbering."}])
-        # ref1 = completion.choices[0].message.content
-
-        # prompts = ["write abstract about"+title,
-        #            "write introduction about"+title, "write only literature survey based on"+ref1, "10 Keywords Related in single line comma format "+title, "write conclusion about"+title]
-        # abstract, intro, literature, keywords, conclusion = "", "", "", "", ""
-
-        # for i, prompt in enumerate(prompts):
-        #     response = openai.Completion.create(
-        #         model="text-davinci-003",
-        #         prompt=prompt,
-        #         temperature=1,
-        #         max_tokens=1024,
-        #         top_p=1,
-        #         frequency_penalty=0,
-        #         presence_penalty=0
-        #     )
-        #     generated_text = response.choices[0].text
-        #     if i == 0:
-        #         abstract = generated_text
-        #     elif i == 1:
-        #         intro = generated_text
-        #     elif i == 2:
-        #         literature = generated_text
-        #     elif i == 3:
-        #         keywords = generated_text
-        #     elif i == 4:
-        #         conclusion = generated_text
 
         completion = openai.ChatCompletion.create(
             model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Write Abstract, only Introduction, Keywords, Conclusion about "+title+" in detail. Give me in this format Abstract:, Introduction:, Keywords: & Conclusion:."}])
@@ -159,8 +98,6 @@ def generate():
             model="gpt-3.5-turbo", messages=[{"role": "user", "content": "write 5 references(List references in square parenthesis format) about "+title+". write detailed Literature survey according to generated references.. give me in this format References: & Literature Survey: "}])
         part2 = completion.choices[0].message.content
 
-        print(part2)
-
         # Define regular expressions for the references and literature survey
         reference_re = 'References:(.*?)Literature Survey:'
         literature_survey_re = 'Literature Survey:(.*?)$'
@@ -181,9 +118,6 @@ def generate():
             references = "No References found in the response."
 
         # Print the extracted sections
-        print("*References: ", references+"\n")
-        print("*Literature Survey: ", literature_survey+"\n")
-
         document = Document('IEEE.docx')  # Open the document
 
         # Access the title paragraph and change its text
@@ -230,7 +164,7 @@ def generate():
         return render_template('result.html')
 
     except Exception as e:
-        return str(e)
+        return "There was problem while generating"
 
 
 @app.route('/download')
@@ -238,10 +172,10 @@ def download():
     try:
         document = Document()
         # Add content to the document here
-        return send_file('static/output.docx', as_attachment=True)
+        return send_from_directory(STATIC_DIR, "output.docx", as_attachment=True)
     except Exception as e:
         return str(e)
 
 
 if __name__ == '__main__':
-    app.run(port=8000, debug=True)
+    app.run(debug=True)
