@@ -164,7 +164,7 @@ async def generate():
         return render_template('result.html')
 
     except Exception as e:
-        return "There was problem while generating"
+        return str(e)
 
 
 @app.route('/download')

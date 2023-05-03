@@ -3,10 +3,7 @@
     "builds": [
         {
             "src": "app.py",
-            "use": "@vercel/python",
-            "config": {
-                "buildCommand": "pip install --use-pep517 -r requirements.txt"
-            }
+            "use": "@vercel/python"
         },
         {
             "src": "static/**",
@@ -28,11 +25,5 @@
     ],
     "env": {
         "OPENAI_API_KEY": "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"
-    },
-    "functions": {
-        "app": {
-            "memory": 512,
-            "timeout": 30
-        }
     }
 }
