@@ -2,6 +2,5 @@ __pycache__/
 .flaskenv
 .DS_Store
 env/
-static/
 .vscode/
 .vercel
