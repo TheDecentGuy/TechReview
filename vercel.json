@@ -1,26 +1,18 @@
 {
     "version": 2,
-    "builds": [
-        {
-            "src": "app.py",
-            "use": "@vercel/python"
-        },
-        {
-            "src": "static/**",
-            "use": "@vercel/static"
+    "functions": {
+        "api/app.py": {
+            "runtime": "@vercel/python"
         }
-    ],
-    "routes": [
+    },
+    "rewrites": [
         {
-            "src": "/generate",
-            "methods": [
-                "POST"
-            ],
-            "dest": "/app.py"
+            "source": "/generate",
+            "destination": "/api/wsgi.py"
         },
         {
-            "src": "/(.*)",
-            "dest": "/app.py"
+            "source": "/(.*)",
+            "destination": "/api/wsgi.py"
         }
     ],
     "env": {
