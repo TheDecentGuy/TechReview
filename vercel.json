@@ -2,14 +2,28 @@
     "version": 2,
     "builds": [
         {
-            "src": "./wsgi.py",
+            "src": "wsgi.py",
             "use": "@vercel/python"
+        },
+        {
+            "src": "static/**",
+            "use": "@vercel/static"
         }
     ],
     "routes": [
         {
+            "src": "/generate",
+            "methods": [
+                "POST"
+            ],
+            "dest": "/wsgi.py"
+        },
+        {
             "src": "/(.*)",
-            "dest": "/"
+            "dest": "/wsgi.py"
         }
-    ]
+    ],
+    "env": {
+        "OPENAI_API_KEY": "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"
+    }
 }
