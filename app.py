@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, send_from_directory
 from docx import Document
-from flask import send_file
 from docx2pdf import convert
 import time
 import openai
@@ -8,9 +7,6 @@ import re
 import os
 
 app = Flask(__name__)
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_DIR = os.path.join(BASE_DIR, 'static')
 
 
 @app.route('/')
@@ -43,7 +39,7 @@ def form():
 
 
 @app.route('/generate', methods=['POST'])
-async def generate():
+def generate():
     try:
         title = request.form['title']
         author = request.form['author']
@@ -55,7 +51,7 @@ async def generate():
         openai.api_key = "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"
 
         completion = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Write Abstract, only Introduction, Keywords, Conclusion about "+title+" in detail. Give me in this format Abstract:, Introduction:, Keywords: & Conclusion:."}])
+            model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Write Abstract, only Introduction, Keywords, Conclusion about "+title+" in detail. Give me in this format Abstract:, Introduction:, Keywords: & Conclusion:"}])
 
         part1 = completion.choices[0].message.content
 
@@ -95,7 +91,7 @@ async def generate():
         time.sleep(10)
 
         completion = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo", messages=[{"role": "user", "content": "write 5 references(List references in square parenthesis format) about "+title+". write detailed Literature survey according to generated references.. give me in this format References: & Literature Survey: "}])
+            model="gpt-3.5-turbo", messages=[{"role": "user", "content": "write 5 references(List references numbering in square parenthesis format) about "+title+". write detailed Literature survey according to generated references.. give me in this format References: & Literature Survey: "}])
         part2 = completion.choices[0].message.content
 
         # Define regular expressions for the references and literature survey
@@ -171,11 +167,12 @@ async def generate():
 def download():
     try:
         document = Document()
+
         # Add content to the document here
-        return send_from_directory(STATIC_DIR, "output.docx", as_attachment=True)
+        return send_from_directory("static", 'output.docx', as_attachment=True)
     except Exception as e:
         return str(e)
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port="3999", debug=True)
