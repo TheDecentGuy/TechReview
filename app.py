@@ -11,31 +11,33 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    try:
-        if os.path.exists('static/output.docx'):
-            os.remove('static/output.docx')
-            os.remove('static/output.pdf')
-            return render_template('index.html')
+    # try:
+    #     if os.path.exists('static/output.docx'):
+    #         os.remove('static/output.docx')
+    #         os.remove('static/output.pdf')
+    #         return render_template('index.html')
 
-        else:
-            return render_template('index.html')
+    #     else:
+    #         return render_template('index.html')
 
-    except Exception as e:
-        return str(e)
+    # except Exception as e:
+    #     return str(e)
+    return render_template('index.html')
 
 
 @app.route('/form')
 def form():
-    try:
-        if os.path.exists('static/output.docx'):
-            os.remove('static/output.docx')
-            os.remove('static/output.pdf')
-            return render_template('form.html')
+    # try:
+    #     if os.path.exists('static/output.docx'):
+    #         os.remove('static/output.docx')
+    #         os.remove('static/output.pdf')
+    #         return render_template('form.html')
 
-        else:
-            return render_template('form.html')
-    except Exception as e:
-        return str(e)
+    #     else:
+    #         return render_template('form.html')
+    # except Exception as e:
+    #     return str(e)
+    return render_template('form.html')
 
 
 @app.route('/generate', methods=['POST'])
