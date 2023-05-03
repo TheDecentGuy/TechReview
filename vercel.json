@@ -1,21 +1,15 @@
 {
     "version": 2,
-    "functions": {
-        "api/app.py": {
-            "runtime": "@vercel/python"
-        }
-    },
-    "rewrites": [
+    "builds": [
         {
-            "source": "/generate",
-            "destination": "/api/wsgi.py"
-        },
-        {
-            "source": "/(.*)",
-            "destination": "/api/wsgi.py"
+            "src": "./wsgy.py",
+            "use": "@vercel/python"
         }
     ],
-    "env": {
-        "OPENAI_API_KEY": "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"
-    }
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "/"
+        }
+    ]
 }
