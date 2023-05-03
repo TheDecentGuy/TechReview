@@ -19,10 +19,10 @@ def index():
         if os.path.exists('static/output.docx'):
             os.remove('static/output.docx')
             os.remove('static/output.pdf')
-            return render_template('result.html')
+            return render_template('index.html')
 
         else:
-            return render_template('result.html')
+            return render_template('index.html')
 
     except Exception as e:
         return str(e)
@@ -172,10 +172,10 @@ def download():
     try:
         document = Document()
         # Add content to the document here
-        return send_from_directory(STATIC_DIR, "output_copy.docx", as_attachment=True)
+        return send_from_directory(STATIC_DIR, "output.docx", as_attachment=True)
     except Exception as e:
         return str(e)
 
 
 if __name__ == '__main__':
-    app.run(port=3999, debug=True)
+    app.run(port=3999,debug=True)
