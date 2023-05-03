@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, send_from_directory
 from docx import Document
+from flask import send_file
 from docx2pdf import convert
 import time
 import openai
@@ -8,36 +9,37 @@ import os
 
 app = Flask(__name__)
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+
 
 @app.route('/')
 def index():
-    # try:
-    #     if os.path.exists('static/output.docx'):
-    #         os.remove('static/output.docx')
-    #         os.remove('static/output.pdf')
-    #         return render_template('index.html')
+    try:
+        if os.path.exists('static/output.docx'):
+            os.remove('static/output.docx')
+            os.remove('static/output.pdf')
+            return render_template('index.html')
 
-    #     else:
-    #         return render_template('index.html')
+        else:
+            return render_template('index.html')
 
-    # except Exception as e:
-    #     return str(e)
-    return render_template('index.html')
+    except Exception as e:
+        return str(e)
 
 
 @app.route('/form')
 def form():
-    # try:
-    #     if os.path.exists('static/output.docx'):
-    #         os.remove('static/output.docx')
-    #         os.remove('static/output.pdf')
-    #         return render_template('form.html')
+    try:
+        if os.path.exists('static/output.docx'):
+            os.remove('static/output.docx')
+            os.remove('static/output.pdf')
+            return render_template('form.html')
 
-    #     else:
-    #         return render_template('form.html')
-    # except Exception as e:
-    #     return str(e)
-    return render_template('form.html')
+        else:
+            return render_template('form.html')
+    except Exception as e:
+        return str(e)
 
 
 @app.route('/generate', methods=['POST'])
@@ -53,7 +55,7 @@ def generate():
         openai.api_key = "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"
 
         completion = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Write Abstract, only Introduction, Keywords, Conclusion about "+title+" in detail. Give me in this format Abstract:, Introduction:, Keywords: & Conclusion:"}])
+            model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Write Abstract, only Introduction, Keywords, Conclusion about "+title+" in detail. Give me in this format Abstract:, Introduction:, Keywords: & Conclusion:."}])
 
         part1 = completion.choices[0].message.content
 
@@ -169,12 +171,11 @@ def generate():
 def download():
     try:
         document = Document()
-
         # Add content to the document here
-        return send_from_directory("static", 'output.docx', as_attachment=True)
+        return send_from_directory(STATIC_DIR, "output.docx", as_attachment=True)
     except Exception as e:
         return str(e)
 
 
 if __name__ == '__main__':
-    app.run(port="3999", debug=True)
+    app.run(port=3999, debug=True)
