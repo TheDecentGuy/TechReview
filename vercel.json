@@ -4,19 +4,12 @@
         {
             "src": "wsgi.py",
             "use": "@vercel/python"
-        },
-        {
-            "src": "static/**",
-            "use": "@vercel/static"
         }
     ],
     "routes": [
         {
-            "src": "/generate",
-            "methods": [
-                "POST"
-            ],
-            "dest": "/wsgi.py"
+            "src": "/static/(.*)",
+            "dest": "/static/$1"
         },
         {
             "src": "/(.*)",
@@ -24,6 +17,7 @@
         }
     ],
     "env": {
-        "OPENAI_API_KEY": "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"
+        "FLASK_APP": "wsgi.py",
+        "FLASK_ENV": "production"
     }
 }
