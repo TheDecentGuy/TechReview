@@ -18,7 +18,6 @@ def index():
     try:
         if os.path.exists('/tmp/output.docx'):
             os.remove('/tmp/output.docx')
-            os.remove('/tmp/output.pdf')
             return render_template('index.html')
 
         else:
@@ -33,7 +32,6 @@ def form():
     try:
         if os.path.exists('static/output.docx'):
             os.remove('static/output.docx')
-            os.remove('static/output.pdf')
             return render_template('form.html')
 
         else:
@@ -52,7 +50,7 @@ def generate():
         result = request.form['result']
 
         # Generate the technical review paper using OpenAI API
-        openai.api_key = "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"
+        openai.api_key = os.environ.get('API_KEY')
 
         completion = openai.ChatCompletion.create(
             model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Write Abstract, only Introduction, Keywords, Conclusion about "+title+" in detail. Give me in this format Abstract:, Introduction:, Keywords: & Conclusion:."}])
@@ -161,6 +159,7 @@ def generate():
         # convert('/tmp/output.docx', '/tmp/output.pdf')
 
         # Return the generated paper to the user
+
         return render_template('result.html')
 
     except Exception as e:
@@ -175,7 +174,6 @@ def download():
         return send_from_directory(STATIC_DIR, "output.docx", as_attachment=True)
     except Exception as e:
         return str(e)
-
 
 
 if __name__ == '__main__':
