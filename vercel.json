@@ -3,10 +3,7 @@
     "builds": [
         {
             "src": "wsgi.py",
-            "use": "@vercel/python",
-            "env": {
-                "TMPDIR": ".tmp"
-            }
+            "use": "@vercel/python"
         }
     ],
     "routes": [
@@ -16,7 +13,7 @@
         },
         {
             "src": "/(.*)",
-            "dest": "/app.py"
+            "dest": "/wsgi.py"
         }
     ],
     "env": {

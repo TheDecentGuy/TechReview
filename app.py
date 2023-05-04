@@ -16,9 +16,9 @@ STATIC_DIR = os.path.join(BASE_DIR, '.tmp')
 @app.route('/')
 def index():
     try:
-        if os.path.exists('.tmp/output.docx'):
-            os.remove('.tmp/output.docx')
-            os.remove('.tmp/output.pdf')
+        if os.path.exists('/tmp/output.docx'):
+            os.remove('/tmp/output.docx')
+            os.remove('/tmp/output.pdf')
             return render_template('index.html')
 
         else:
@@ -157,8 +157,8 @@ def generate():
         title_paragraph = document.paragraphs[22]
         title_paragraph.text = references
 
-        document.save('.tmp/output.docx')  # Save the modified document
-        convert('.tmp/output.docx', '.tmp/output.pdf')
+        document.save('/tmp/output.docx')  # Save the modified document
+        convert('/tmp/output.docx', '/tmp/output.pdf')
 
         # Return the generated paper to the user
         return render_template('result.html')
@@ -179,7 +179,7 @@ def download():
 
 @app.route('/download/<path:filename>')
 def download_file(filename):
-    return send_from_directory('.tmp', "output.pdf")
+    return send_from_directory('/tmp', "output.pdf")
 
 
 if __name__ == '__main__':
