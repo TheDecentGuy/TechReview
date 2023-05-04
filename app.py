@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, send_from_directory
 from docx import Document
 from flask import send_file
-from docx2pdf import convert
+# from docx2pdf import convert
 import time
 import openai
 import re
@@ -10,7 +10,7 @@ import os
 app = Flask(__name__)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_DIR = os.path.join(BASE_DIR, '.tmp')
+STATIC_DIR = os.path.join(BASE_DIR, '/tmp')
 
 
 @app.route('/')
@@ -158,7 +158,7 @@ def generate():
         title_paragraph.text = references
 
         document.save('/tmp/output.docx')  # Save the modified document
-        convert('/tmp/output.docx', '/tmp/output.pdf')
+        # convert('/tmp/output.docx', '/tmp/output.pdf')
 
         # Return the generated paper to the user
         return render_template('result.html')
@@ -177,9 +177,9 @@ def download():
         return str(e)
 
 
-@app.route('/download/<path:filename>')
-def download_file(filename):
-    return send_from_directory('/tmp', "output.pdf")
+# @app.route('/download/<path:filename>')
+# def download_file(filename):
+#     return send_from_directory('/tmp', "output.pdf")
 
 
 if __name__ == '__main__':
