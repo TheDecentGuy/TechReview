@@ -177,10 +177,6 @@ def download():
         return str(e)
 
 
-# @app.route('/download/<path:filename>')
-# def download_file(filename):
-#     return send_from_directory('/tmp', "output.pdf")
-
 
 if __name__ == '__main__':
     app.run(port=3999, debug=True)
