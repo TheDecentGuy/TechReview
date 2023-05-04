@@ -10,15 +10,15 @@ import os
 app = Flask(__name__)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_DIR = os.path.join(BASE_DIR, 'static')
+STATIC_DIR = os.path.join(BASE_DIR, '.tmp')
 
 
 @app.route('/')
 def index():
     try:
-        if os.path.exists('static/output.docx'):
-            os.remove('static/output.docx')
-            os.remove('static/output.pdf')
+        if os.path.exists('.tmp/output.docx'):
+            os.remove('.tmp/output.docx')
+            os.remove('.tmp/output.pdf')
             return render_template('index.html')
 
         else:
@@ -157,8 +157,8 @@ def generate():
         title_paragraph = document.paragraphs[22]
         title_paragraph.text = references
 
-        document.save('static/output.docx')  # Save the modified document
-        convert('static/output.docx', 'static/output.pdf')
+        document.save('.tmp/output.docx')  # Save the modified document
+        convert('.tmp/output.docx', '.tmp/output.pdf')
 
         # Return the generated paper to the user
         return render_template('result.html')
@@ -175,6 +175,11 @@ def download():
         return send_from_directory(STATIC_DIR, "output.docx", as_attachment=True)
     except Exception as e:
         return str(e)
+
+
+@app.route('/download/<path:filename>')
+def download_file(filename):
+    return send_from_directory('.tmp', "output.pdf")
 
 
 if __name__ == '__main__':
