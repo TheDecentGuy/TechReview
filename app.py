@@ -16,8 +16,8 @@ STATIC_DIR = os.path.join(BASE_DIR, '/tmp')
 @app.route('/')
 def index():
     try:
-        if os.path.exists('/tmp/output.docx'):
-            os.remove('/tmp/output.docx')
+        if os.path.exists('/tmp/ReviewGen.docx'):
+            os.remove('/tmp/ReviewGen.docx')
             return render_template('index.html')
 
         else:
@@ -30,8 +30,8 @@ def index():
 @app.route('/form')
 def form():
     try:
-        if os.path.exists('static/output.docx'):
-            os.remove('static/output.docx')
+        if os.path.exists('static/ReviewGen.docx'):
+            os.remove('static/ReviewGen.docx')
             return render_template('form.html')
 
         else:
@@ -155,7 +155,7 @@ def generate():
         title_paragraph = document.paragraphs[22]
         title_paragraph.text = references
 
-        document.save('/tmp/output.docx')  # Save the modified document
+        document.save('/tmp/ReviewGen.docx')  # Save the modified document
         # convert('/tmp/output.docx', '/tmp/output.pdf')
 
         # Return the generated paper to the user
@@ -171,7 +171,7 @@ def download():
     try:
         document = Document()
         # Add content to the document here
-        return send_from_directory(STATIC_DIR, "output.docx", as_attachment=True)
+        return send_from_directory(STATIC_DIR, "ReviewGen.docx", as_attachment=True)
     except Exception as e:
         return str(e)
 
